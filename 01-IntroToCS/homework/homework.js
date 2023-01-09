@@ -4,10 +4,11 @@ function BinarioADecimal(num) {
    let suma = 0;
    for (let i=0;i<numero.length; i++ ) {
 
-      suma += +numero[i] *2 ** (numero.length - 1 - i);
+      suma = suma + num[i] *2 ** (num.length - 1 - i);
       
    }
   return suma;
+
 
 }
 

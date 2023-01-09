@@ -12,28 +12,28 @@ var a = 5;
 var b = 10;
 var c = function (a, b, c) {
    var x = 10;
-   console.log(x);
-   console.log(a);
+   console.log(x);//10
+   console.log(a);//5   incorrecta  - correcta 8
    var f = function (a, b, c) {
       b = a;
-      console.log(b);
+      console.log(b);//5 incorrecta - correcta 8
       b = c;
       var x = 5;
    };
    f(a, b, c);
-   console.log(b);
+   console.log(b);// 10   incorrecta - correcta 9
 };
 c(8, 9, 10);
-console.log(b);
-console.log(x);
+console.log(b);//9  incorrecta   - correcta 10
+console.log(x);//10 incorrecta   - correcta 1
 ```
 
 ```javascript
-console.log(bar);
-console.log(baz);
+console.log(bar);//error no esta definida
+console.log(baz);//error no esta definida
 foo();
 function foo() {
-   console.log('Hola!');
+   console.log('Hola!'); //Hola
 }
 var bar = 1;
 baz = 2;
@@ -44,19 +44,19 @@ var instructor = 'Tony';
 if (true) {
    var instructor = 'Franco';
 }
-console.log(instructor);
+console.log(instructor);//Franco
 ```
 
 ```javascript
 var instructor = 'Tony';
-console.log(instructor);
+console.log(instructor);//Tony
 (function () {
    if (true) {
-      var instructor = 'Franco';
+      var instructor = 'Franco';//Franco
       console.log(instructor);
    }
 })();
-console.log(instructor);
+console.log(instructor);//Tony
 ```
 
 ```javascript
@@ -65,11 +65,11 @@ let pm = 'Franco';
 if (true) {
    var instructor = 'The Flash';
    let pm = 'Reverse Flash';
-   console.log(instructor);
-   console.log(pm);
+   console.log(instructor);//The Flash
+   console.log(pm);//Reverse Flash
 }
-console.log(instructor);
-console.log(pm);
+console.log(instructor);//Tony
+console.log(pm);//Franco
 ```
 
 ### Coerción de Datos
@@ -77,22 +77,22 @@ console.log(pm);
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3"  // 6/3
+"2" * "3"//6
+4 + 5 + "px"//9px
+"$" + 4 + 5 //$9   incorrecta-correcta $45
+"4" - 2 //2
+"4px" - 2 // 2xp incorrecta  -correcta NaN
+7 / 0  // error incorrecto - correcto Infinity
+{}[0] // objeto con array cero - length 1
+parseInt("09") // 9 
+5 && 2 // 5
+2 && 5 // 2
+5 || 0 // 5
+0 || 5 // 5
+[3]+[3]-[10] //23
+3>2>1 // 3>2 = true luego true>1 =false
+[] == ![] // no entiendo la respuesta 
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -112,7 +112,9 @@ function test() {
    }
 }
 
-test();
+test();  // 2 - lo que entiendo es que como el console de (a) esta arriba de la variable definida de a, no trae
+// a la consola ese valor; el resultado es 2 porque la funcion pide return para la funcion foo , y aunque 
+//este definida antes de la accion del retur, esta se sale y al invocar la funcion con el console foo retorna 2.
 ```
 
 Y el de este código? :
@@ -128,7 +130,8 @@ function getFood(food) {
    return snack;
 }
 
-getFood(false);
+getFood(false); // yo pienso que al retornar snack me trae Meow Mix, pues me dice que la funcion getFood 
+//es falsa, es decir que no es food, por lo que si es falsa me trae el resultado de la variable.
 ```
 
 ### This
@@ -147,11 +150,11 @@ var obj = {
    },
 };
 
-console.log(obj.prop.getFullname());
+console.log(obj.prop.getFullname()); // returna : Aurelio de Rosa dado que esta prinicpalmente dentro de prop y porop esta dentro de Obj.
 
 var test = obj.prop.getFullname;
 
-console.log(test());
+console.log(test()); // se define otro objeto el cual tiene como nombre test y una value el cual es otro objeto que contiene una funcion getfllname la cual retorna ths.fullname. Por lo que al buscar fullname dentro no lo encuentra, sale y encuenta a fullname q es una variable y retorna esta como this de este objeto.
 ```
 
 ### Event loop
@@ -170,5 +173,5 @@ function printing() {
    console.log(4);
 }
 
-printing();
+printing(); // No se cual es la respuesta -- la respuesta de la consola es 1 4 y luego 3 2. No se como explicarlo.
 ```
