@@ -13,7 +13,7 @@ var b = 10;
 var c = function (a, b, c) {
    var x = 10;
    console.log(x);//10
-   console.log(a);//5   incorrecta  - correcta 8
+   console.log(a);//5   incorrecta  - correcta 8 porque al invocar la funcion abajo se le dio variables a cada una c(8, 9, 10)
    var f = function (a, b, c) {
       b = a;
       console.log(b);//5 incorrecta - correcta 8
@@ -29,9 +29,9 @@ console.log(x);//10 incorrecta   - correcta 1
 ```
 
 ```javascript
-console.log(bar);//error no esta definida
-console.log(baz);//error no esta definida
-foo();
+console.log(bar);//Undefined
+console.log(baz);//error no esta definida, porque no se definio a baz dentro tipo de variable (var-let o const)
+foo();// automaticamente js sube la funcion y de esta forma se puede invocar la funcion, a diferencia de las variables no lo hace js. Por eso sale undefinet
 function foo() {
    console.log('Hola!'); //Hola
 }
@@ -52,11 +52,11 @@ var instructor = 'Tony';
 console.log(instructor);//Tony
 (function () {
    if (true) {
-      var instructor = 'Franco';//Franco
-      console.log(instructor);
+      var instructor = 'Franco';
+      console.log(instructor);//Franco  contexto de la funcion
    }
 })();
-console.log(instructor);//Tony
+console.log(instructor);//Tony   contexto global
 ```
 
 ```javascript
@@ -150,7 +150,7 @@ var obj = {
    },
 };
 
-console.log(obj.prop.getFullname()); // returna : Aurelio de Rosa dado que esta prinicpalmente dentro de prop y porop esta dentro de Obj.
+console.log(obj.prop.getFullname()); // returna : Aurelio de Rosa dado que esta prinicpalmente dentro de prop y prop esta dentro de Obj.
 
 var test = obj.prop.getFullname;
 
@@ -173,5 +173,5 @@ function printing() {
    console.log(4);
 }
 
-printing(); // No se cual es la respuesta -- la respuesta de la consola es 1 4 y luego 3 2. No se como explicarlo.
+printing(); // No se cual es la respuesta -- la respuesta de la consola es 1 4 y luego 3 2. la funcion setTimeout le da la orden a la consola de que se demore 1000 seg para imprimir el valor 2 y lo mismo con 0 ceero para imprimir el valor de 3. Aunque primero imprime el 3 luego el 2. y antes de estos primero se imprime el 1 y luego el 4. luego lo mencionado.
 ```
