@@ -1,7 +1,10 @@
 'use strict';
 
 // EJERCICIO 1
-function nFactorial(n) {}
+function nFactorial(n) {
+   
+   return nFactorial(5)
+}
 
 // EJERCICIO 2
 function nFibonacci(n) {}
