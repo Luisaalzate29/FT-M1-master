@@ -14,13 +14,14 @@ const otroContador = counter()
 otroContador()      // 1
 otroContador()      // 2 */
 
-function counter(x) {
- return function (){
-         return x++
+function counter() {
+  let x = 1
+ return function incrementar(){
+    
+    return x++
  }
   }
  const otroContador = counter()
- console.log(otroContador())
  
 
 /* Ejercicio 2
@@ -44,12 +45,33 @@ otra vez cálculos que ya se hicieron anteriormente.
   squareCache(5)    // invocará a square(5), almacenará el resultado y lo retornará
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) */
 
-function cacheFunction(cb) {
- return function cache (){
+  // en este caso la cb es la funcion square
   
- }
+  function cacheFunction(cb) {
+    let objmemoria = {}
 
+    return function cache (arg){
+    if (!objmemoria.hasOwnProperty(arg)){
+    objmemoria[arg] = cb(arg)
+     
+   }
+   return objmemoria[arg]
+   } 
+   }
+
+/*return function cache (arg){
+// buscar memoria con hasOwnProperty (para validar las propiedades dentro de un objeto) arg es la propiedad dentro del objeto y su resultado es la ejecucion de la cb (propiedad 5 : 25)
+if (objmemoria.hasOwnProperty(arg)){
+// si ya tiene el resultado, devolverlo o retornarlo 
+return objmemoria[arg];
+} else{
+// si no tiene resultado, ejecutar la cb y la guardo en memoria
+objmemoria[arg] = cb(arg)
+return objmemoria[arg];
 }
+}
+TODO ESTO SE PUEDE RESUMIR ASI, DADO QUE SE ESTA REPITIENDO CODIGO (RETURN OBJMEMORIA[ARG) Y SE HACE NEGANDO CON ESTE SIMBOLO-> ! LA PREGUNTA DEL IF Y SE DEJA LO QUE DEBE EJECUTARSE*/ 
+
 
 //----------------------------------------
 
@@ -74,21 +96,26 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor = getNombre.bind();
-let getNombreAlumno = getNombre.bind();
+let getNombreInstructor = getNombre.bind(instructor);
+
+let getNombreAlumno = getNombre.bind(alumno);
 
 /*
   Ejercicio 4
-  Sin modificar la función crearCadena, usar bind para guardar, en las tres variables declaradas a continuación, tres funciones que retornen una cadena (string) y el delimitador especificado (asteriscos, guiones, y guiones bajos, respectivamente). Las funciones obtenidas deberían recibir solamente un argumento - la cadena de texto - ya que los otros argumentos habrán sido "bindeados". 
+  Sin modificar la función crearCadena, usar bind para guardar, en las tres variables declaradas a continuación,
+  tres funciones que retornen una cadena (string) y el delimitador especificado (asteriscos, guiones, y guiones bajos, respectivamente). Las funciones obtenidas deberían recibir solamente un argumento - la cadena de texto - ya que los otros argumentos habrán sido "bindeados". 
 */
 
 function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
     return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos = crearCadena.bind();
-let textoGuiones = crearCadena.bind();
-let textoUnderscore = crearCadena.bind();
+let textoAsteriscos = crearCadena.bind(null,"*","*",'Hola');
+// en el bind lo primero q se llama es un objeto como no hay objeto (this es el objeto), luego las propiedaddes o argumentos de la funcion, se pone en donde va el nombre del objeto nulo, con null o vacio)
+let textoGuiones = crearCadena.bind(null, "-","-",'Hola');
+let textoUnderscore = crearCadena.bind(null, "_","_",'Hola');
+
+
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
